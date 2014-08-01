@@ -33,6 +33,7 @@ btsync:
         - user: btsync
         - group: btsync
         - mode: 400
+        - template: jinja
 
 {{ salt['pillar.get']('monit:conf_dir') }}/btsync:
     file.managed:

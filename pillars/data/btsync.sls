@@ -9,14 +9,14 @@ btsync:
         device_name: PHLAKNET Sync Server
         storage_path: /var/lib/btsync
         listening_port: 51515
-        check_for_updates: false
-        use_upnp: false
-        download_limi: 0
+        check_for_updates: 'false'
+        use_upnp: 'false'
+        download_limit: 0
         upload_limit: 0
-        disk_low_priority: true
-        lan_encrypt_data: true
-        lan_use_tcp: false
-        rate_lmit_local_peers: false
+        disk_low_priority: 'true'
+        lan_encrypt_data: 'true'
+        lan_use_tcp: 'false'
+        rate_limit_local_peers: 'false'
         folder_rescan_interval: 600
         webui:
             listen_address: 0.0.0.0
