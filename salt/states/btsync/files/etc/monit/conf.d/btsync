@@ -1,0 +1,5 @@
+check process btsync with pidfile {{ salt['pillar.get']('btsync:monit:pid_file') }}
+    start program = "{{ salt['pillar.get']('btsync:monit:init_file') }} start"
+    stop program  = "{{ salt['pillar.get']('btsync:monit:init_file') }} stop"
+    if failed host localhost port {{ salt['pillar.get']('btsync:config:webui:listen_port') }} then alert
+    if 5 restarts within 5 cycles then timeout
