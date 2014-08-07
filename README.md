@@ -8,5 +8,5 @@
 
   3. Configure the minion
 
-        $ sudo cp /etc/salt/minion /etc/salt/minon.bak
+        $ sudo mv /etc/salt/minion /etc/salt/minon.bak
         $ sudo cp /srv/salt/minion.conf /etc/salt/minion
