@@ -6,4 +6,5 @@ base:
         - nginx
         # - openssh-server
         - postfix
+        - ufw
         - unattended-upgrades
