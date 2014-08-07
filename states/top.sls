@@ -4,7 +4,7 @@ base:
         - groups
         - monit
         - nginx
-        # - openssh-server
+        - openssh-server
         - postfix
         - ufw
         - unattended-upgrades
