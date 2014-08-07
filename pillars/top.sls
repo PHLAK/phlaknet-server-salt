@@ -5,3 +5,4 @@ base:
         - data.monit
         - data.nginx
         - data.openssh-server
+        - data.unattended-upgrades
