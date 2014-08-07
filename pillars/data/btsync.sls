@@ -4,6 +4,8 @@ btsync:
     group: btsync
 
     config_file: /etc/btsync/debconf-default.conf
+    init_file: /etc/init.d/btsync
+    pid_file: /var/lib/btsync/sync.pid
 
     config:
         device_name: PHLAKNET Sync Server
@@ -26,6 +28,12 @@ btsync:
 
     sync_dir: /srv/sync
 
-    monit:
-        pid_file: /var/lib/btsync/sync.pid
-        init_file: /etc/init.d/btsync
+    ssl:
+        days: 3652
+        strength: 4096
+        cert: {{ salt['pillar.get']('nginx:dirs:ssl') }}/btsync.crt
+        key: {{ salt['pillar.get']('nginx:dirs:ssl') }}/btsync.key
+
+    vhost:
+        config: {{ salt['pillar.get']('nginx:dirs:sites_available') }}/btsync
+        fqdn: sync.HOSTNAME.phlak.net

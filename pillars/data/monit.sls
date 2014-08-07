@@ -2,6 +2,8 @@ monit:
 
     config_file: /etc/monit/monitrc
 
+    conf_dir: /etc/monit/conf.d
+
     config:
         daemon_interval: 120
         files:
@@ -19,6 +21,4 @@ monit:
             port: 2812
             groups:
                 - "@webdev"
-        include_path: /etc/monit/conf.d/*
-
-    conf_dir: /etc/monit/conf.d/
+        include_path: {{ salt['pillar.get']('monit:conf_dir') }}/*

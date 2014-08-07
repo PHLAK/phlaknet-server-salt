@@ -17,6 +17,43 @@ nginx:
         - user: root
         - group: root
         - mode: 644
+        - template: jinja
+
+    cmd.run:
+        - name: ufw allow 80 && ufw allow 443
+        - timeout: 30
+        - shell: /bin/bash
+        - require:
+            - pkg: ufw
+        - onlyif:
+            - pkg: nginx
+
+{{ salt['pillar.get']('nginx:dirs:sites_available') }}:
+    file.directory:
+        - user: root
+        - group: root
+        - mode: 755
+        - require:
+            - pkg: nginx
+
+{{ salt['pillar.get']('nginx:dirs:sites_enabled') }}:
+    file.directory:
+        - user: root
+        - group: root
+        - mode: 755
+        - require:
+            - pkg: nginx
+
+{{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/default:
+    file.absent
+
+{{ salt['pillar.get']('nginx:dirs:ssl') }}:
+    file.directory:
+        - user: root
+        - group: root
+        - mode: 755
+        - require:
+            - pkg: nginx
 
 {{ salt['pillar.get']('monit:conf_dir') }}/nginx:
     file.managed:
@@ -25,5 +62,6 @@ nginx:
         - group: root
         - mode: 644
         - template: jinja
-        - require:
+        - onlyif:
             - pkg: monit
+

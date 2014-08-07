@@ -34,6 +34,60 @@ btsync:
         - group: btsync
         - mode: 400
         - template: jinja
+        - require:
+            - pkg: btsync
+
+    cmd.run:
+        - name: ufw allow 51515
+        - timeout: 30
+        - shell: /bin/bash
+        - require:
+            - pkg: ufw
+        - onlyif:
+            - pkg: btsync
+
+btsync-dir:
+
+    file.directory:
+        - name: {{ salt['pillar.get']('btsync:sync_dir') }}
+        - user: {{ salt['pillar.get']('btsync:user') }}
+        - group: {{ salt['pillar.get']('btsync:group') }}
+        - mode: 664
+        - require:
+            - pkg: btsync
+
+btsync-ssl:
+
+    cmd.run:
+        - name: |
+            openssl req -x509 -nodes \
+            -days {{ salt['pillar.get']('btsync:ssl:days') }} \
+            -newkey rsa:{{ salt['pillar.get']('btsync:ssl:strength') }} \
+            -subj "/C=US/ST=Arizona/L=Phoenix/O=PHLAKNET/CN={{ salt['pillar.get']('btsync:vhost:fqdn') }}" \
+            -keyout {{ salt['pillar.get']('btsync:ssl:key') }} \
+            -out {{ salt['pillar.get']('btsync:ssl:cert') }}
+        - timeout: 120
+        - shell: /bin/bash
+        - unless: test -s {{ salt['pillar.get']('btsync:ssl:key') }} && test -s {{ salt['pillar.get']('btsync:ssl:cert') }}
+
+{{ salt['pillar.get']('btsync:vhost:config') }}:
+    file.managed:
+        - source: salt://btsync/files/etc/nginx/sites-available/btsync
+        - user: root
+        - group: root
+        - mode: 644
+        - template: jinja
+        - onlyif:
+            - pkg: nginx
+
+{{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/btsync:
+    file.symlink:
+        - target: {{ salt['pillar.get']('btsync:vhost:config') }}
+        - user: root
+        - group: root
+        - mode: 644
+        - onlyif:
+            - pkg: nginx
 
 {{ salt['pillar.get']('monit:conf_dir') }}/btsync:
     file.managed:
@@ -42,13 +96,5 @@ btsync:
         - group: root
         - mode: 644
         - template: jinja
-        - require:
+        - onlyif:
             - pkg: monit
-
-{{ salt['pillar.get']('btsync:sync_dir') }}:
-    file.directory:
-        - user: {{ salt['pillar.get']('btsync:user') }}
-        - group: {{ salt['pillar.get']('btsync:group') }}
-        - mode: 664
-        - require:
-            - pkg: btsync
