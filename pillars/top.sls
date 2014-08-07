@@ -4,4 +4,4 @@ base:
         - data.groups
         - data.monit
         - data.nginx
-        # - data.openssh
+        - data.openssh-server
