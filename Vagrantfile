@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     salt.minion_config = "minion.conf"
     salt.run_highstate = true
     salt.colorize      = true
+    salt.verbose       = true
   end
 
   # Create a forwarded port mapping which allows access to a specific port
