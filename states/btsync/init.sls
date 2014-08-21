@@ -11,14 +11,16 @@ btsync:
 
     group.present:
         - name: {{ salt['pillar.get']('btsync:group') }}
-        - gid: 120
+        - require:
+            - pkg: btsync
 
     user.present:
         - name: {{ salt['pillar.get']('btsync:user') }}
         - shell: /bin/false
         - home: /var/lib/btsync
-        - uid: 120
-        - gid: 120
+        - require:
+            - pkg: btsync
+            - group: btsync
 
     service.running:
         - enable: true
@@ -37,17 +39,16 @@ btsync:
         - require:
             - pkg: btsync
 
+btsync-ufw-rules:
     cmd.run:
         - name: ufw allow 51515
         - timeout: 30
         - shell: /bin/bash
         - require:
-            - pkg: ufw
-        - onlyif:
             - pkg: btsync
+            - pkg: ufw
 
 btsync-dir:
-
     file.directory:
         - name: {{ salt['pillar.get']('btsync:sync_dir') }}
         - user: {{ salt['pillar.get']('btsync:user') }}
@@ -57,7 +58,6 @@ btsync-dir:
             - pkg: btsync
 
 btsync-ssl:
-
     cmd.run:
         - name: |
             openssl req -x509 -nodes \
@@ -69,32 +69,39 @@ btsync-ssl:
         - timeout: 120
         - shell: /bin/bash
         - unless: test -s {{ salt['pillar.get']('btsync:ssl:key') }} && test -s {{ salt['pillar.get']('btsync:ssl:cert') }}
+        - require:
+            - file: nginx-ssl-dir
 
-{{ salt['pillar.get']('btsync:vhost:config') }}:
+btsync-vhost-available:
     file.managed:
+        - name: {{ salt['pillar.get']('btsync:vhost:config') }}
         - source: salt://btsync/files/etc/nginx/sites-available/btsync
         - user: root
         - group: root
         - mode: 644
         - template: jinja
-        - onlyif:
+        - require:
             - pkg: nginx
 
-{{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/btsync:
+btsync-vhost-enabled:
     file.symlink:
+        - name: {{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/btsync
         - target: {{ salt['pillar.get']('btsync:vhost:config') }}
         - user: root
         - group: root
         - mode: 644
-        - onlyif:
+        - require:
+            - file: btsync-vhost-available
+            - cmd: btsync-ssl
             - pkg: nginx
 
-{{ salt['pillar.get']('monit:conf_dir') }}/btsync:
+btsync-monit-config:
     file.managed:
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}/btsync
         - source: salt://btsync/files/etc/monit/conf.d/btsync
         - user: root
         - group: root
         - mode: 644
         - template: jinja
-        - onlyif:
+        - require:
             - pkg: monit

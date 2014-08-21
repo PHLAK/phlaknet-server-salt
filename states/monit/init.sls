@@ -26,3 +26,5 @@ monit:
         - user: root
         - group: root
         - mode: 755
+        - require:
+            - pkg: monit

@@ -28,35 +28,39 @@ nginx:
         - onlyif:
             - pkg: nginx
 
-{{ salt['pillar.get']('nginx:dirs:sites_available') }}:
+nginx-sites-available-dir:
     file.directory:
+        - name: {{ salt['pillar.get']('nginx:dirs:sites_available') }}
         - user: root
         - group: root
         - mode: 755
         - require:
             - pkg: nginx
 
-{{ salt['pillar.get']('nginx:dirs:sites_enabled') }}:
+nginx-sites-enabled-dir:
     file.directory:
+        - name: {{ salt['pillar.get']('nginx:dirs:sites_enabled') }}
         - user: root
         - group: root
         - mode: 755
         - require:
-            - pkg: nginx
+            - file: nginx-sites-available-dir
 
 {{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/default:
     file.absent
 
-{{ salt['pillar.get']('nginx:dirs:ssl') }}:
+nginx-ssl-dir:
     file.directory:
+        - name: {{ salt['pillar.get']('nginx:dirs:ssl') }}
         - user: root
         - group: root
         - mode: 755
         - require:
             - pkg: nginx
 
-{{ salt['pillar.get']('monit:conf_dir') }}/nginx:
+nginx-monit-conf:
     file.managed:
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}/nginx
         - source: salt://nginx/files/etc/monit/conf.d/nginx
         - user: root
         - group: root
@@ -64,4 +68,3 @@ nginx:
         - template: jinja
         - onlyif:
             - pkg: monit
-
