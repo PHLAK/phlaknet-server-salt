@@ -1,9 +1,9 @@
 base:
     '*' :
         - groups
-        # - management-tools.bwm-ng
-        # - management-tools.htop
-        # - management-tools.speedtest-cli
+        - management-tools.bwm-ng
+        - management-tools.htop
+        - management-tools.speedtest-cli
         - monit
         - new-relic
         - openssh-server
