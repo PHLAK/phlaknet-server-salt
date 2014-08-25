@@ -19,7 +19,7 @@ base:
     'roles:voice':
         - data.mumble-server
 
-    # 'roles:web':
-    #     - data.mysql-server
-    #     - data.nginx
-    #     - data.php
+    'roles:web':
+        - data.mysql-server
+        - data.nginx
+        - data.php

@@ -66,5 +66,5 @@ nginx-monit-conf:
         - group: root
         - mode: 644
         - template: jinja
-        - onlyif:
+        - require:
             - pkg: monit

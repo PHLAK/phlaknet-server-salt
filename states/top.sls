@@ -25,7 +25,7 @@ base:
     'roles:voice':
         - mumble
 
-    # 'roles:web':
-    #     - nginx
-    #     - mysql
-    #     - php
+    'roles:web':
+        - nginx
+        - mysql
+        - php
