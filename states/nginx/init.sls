@@ -28,6 +28,15 @@ nginx:
         - onlyif:
             - pkg: nginx
 
+nginx-web-dir:
+    file.directory:
+        - name {{ salt['pillar.get']('nginx:dirs:web') }}
+        - user: root
+        - group: webdev
+        - mode: 1775
+        - require:
+            - pkg: nginx
+
 nginx-sites-available-dir:
     file.directory:
         - name: {{ salt['pillar.get']('nginx:dirs:sites_available') }}

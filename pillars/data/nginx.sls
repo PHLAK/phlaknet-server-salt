@@ -13,3 +13,4 @@ nginx:
         sites_available: /etc/nginx/sites-available
         sites_enabled: /etc/nginx/sites-enabled
         ssl: /etc/nginx/ssl
+        web: /var/www
