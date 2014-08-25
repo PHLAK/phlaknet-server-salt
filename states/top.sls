@@ -22,8 +22,8 @@ base:
     'roles:sync':
         - btsync
 
-    # 'roles:voice':
-    #     - mumble
+    'roles:voice':
+        - mumble
 
     # 'roles:web':
     #     - nginx

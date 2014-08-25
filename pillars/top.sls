@@ -7,11 +7,11 @@ base:
         - data.tarsnap
         - data.unattended-upgrades
 
-    'roles:kvm':
-        - data.kvm
+    # 'roles:kvm':
+    #     - data.kvm
 
-    'roles:minecraft':
-        - minecraft
+    # 'roles:minecraft':
+    #     - minecraft
 
     'roles:sync':
         - data.btsync
@@ -19,7 +19,7 @@ base:
     'roles:voice':
         - data.mumble-server
 
-    'roles:web':
-        - data.mysql-server
-        - data.nginx
-        - data.php
+    # 'roles:web':
+    #     - data.mysql-server
+    #     - data.nginx
+    #     - data.php
