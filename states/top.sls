@@ -7,4 +7,5 @@ base:
         - openssh-server
         - postfix
         - ufw
+        - tarsnap
         - unattended-upgrades
