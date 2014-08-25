@@ -1,11 +1,31 @@
 base:
     '*' :
-        - btsync
         - groups
+        # - management-tools.bwm-ng
+        # - management-tools.htop
+        # - management-tools.speedtest-cli
         - monit
-        - nginx
+        - new-relic
         - openssh-server
         - postfix
-        - ufw
         - tarsnap
+        - ufw
         - unattended-upgrades
+
+    # 'roles:kvm':
+    #     - kvm
+
+    # 'roles:minecraft':
+    #     - openjdk
+    #     - minecraft
+
+    # 'roles:sync':
+    #     - btsync
+
+    # 'roles:voice':
+    #     - mumble
+
+    # 'roles:web':
+    #     - nginx
+    #     - mysql
+    #     - php
