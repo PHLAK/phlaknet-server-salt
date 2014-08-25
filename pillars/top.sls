@@ -1,25 +1,15 @@
 base:
     '*':
+        - data.btsync
         - data.groups
+        # - data.kvm
+        # - data.minecraft
         - data.monit
+        - data.mumble-server
+        - data.mysql-server
         - data.new-relic
+        - data.nginx
         - data.openssh-server
+        - data.php
         - data.tarsnap
         - data.unattended-upgrades
-
-    # 'roles:kvm':
-    #     - data.kvm
-
-    # 'roles:minecraft':
-    #     - minecraft
-
-    'roles:sync':
-        - data.btsync
-
-    'roles:voice':
-        - data.mumble-server
-
-    'roles:web':
-        - data.mysql-server
-        - data.nginx
-        - data.php

@@ -19,11 +19,14 @@ base:
     #     - openjdk
     #     - minecraft
 
+    'roles:plex':
+        - plex
+
     'roles:sync':
         - btsync
 
     'roles:voice':
-        - mumble
+        - mumble-server
 
     'roles:web':
         - nginx

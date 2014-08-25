@@ -9,7 +9,7 @@ new-relic:
     pkg.latest:
         - name: newrelic-sysmond
         - require:
-            pkgrepo: new-relic
+            - pkgrepo: new-relic
 
     cmd.run:
         - name: nrsysmond-config --set license_key={{ salt['pillar.get']('new-relic:license_key') }}
@@ -18,9 +18,10 @@ new-relic:
         - unless: grep {{ salt['pillar.get']('new-relic:license_key') }} {{ salt['pillar.get']('new-relic:config_file') }}
 
     service.running:
+        - name: newrelic-sysmond
         - enable: true
         - require:
             - pkg: new-relic
             - cmd: new-relic
-        - watch:
-            - file: {{ salt['pillar.get']('new-relic:config_file') }}
+        # - watch:
+        #     - file: {{ salt['pillar.get']('new-relic:config_file') }}

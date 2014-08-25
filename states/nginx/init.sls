@@ -1,3 +1,7 @@
+include:
+    - monit
+    - ufw
+
 nginx:
 
     pkg.installed:
@@ -30,7 +34,7 @@ nginx:
 
 nginx-web-dir:
     file.directory:
-        - name {{ salt['pillar.get']('nginx:dirs:web') }}
+        - name: {{ salt['pillar.get']('nginx:dirs:web') }}
         - user: root
         - group: webdev
         - mode: 1775
