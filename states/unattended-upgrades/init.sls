@@ -43,7 +43,7 @@ unattended-upgrades-50unattended-upgrades:
 
 unattended-upgrades-monit-config:
     file.managed:
-        -name: {{ salt['pillar.get']('monit:conf_dir') }}/unattended-upgrades
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}/unattended-upgrades
         - source: salt://unattended-upgrades/files/etc/monit/conf.d/unattended-upgrades
         - user: root
         - group: root

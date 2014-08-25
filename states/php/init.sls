@@ -23,7 +23,7 @@ php:
 php-monit-config:
     file.managed:
         - name: {{ salt['pillar.get']('monit:conf_dir') }}/php
-        - source: salt://btsync/files/etc/monit/conf.d/php
+        - source: salt://php/files/etc/monit/conf.d/php
         - user: root
         - group: root
         - mode: 644

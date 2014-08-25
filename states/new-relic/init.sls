@@ -29,7 +29,7 @@ new-relic:
 new-relic-monit-config:
     file.managed:
         - name: {{ salt['pillar.get']('monit:conf_dir') }}/new-relic
-        - source: salt://btsync/files/etc/monit/conf.d/new-relic
+        - source: salt://new-relic/files/etc/monit/conf.d/new-relic
         - user: root
         - group: root
         - mode: 644

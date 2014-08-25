@@ -1,8 +1,4 @@
 - user: chris
 - nginx confix
-- nginx proxy server
+- btsync proxy server
 - postfix configuration
-- Optional packages:
-    - speedtest-cli
-    - bwm-ng
-    - htop
