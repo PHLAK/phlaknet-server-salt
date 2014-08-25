@@ -19,8 +19,8 @@ base:
     #     - openjdk
     #     - minecraft
 
-    # 'roles:sync':
-    #     - btsync
+    'roles:sync':
+        - btsync
 
     # 'roles:voice':
     #     - mumble
