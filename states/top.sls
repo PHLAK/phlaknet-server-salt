@@ -15,9 +15,9 @@ base:
     # 'roles:kvm':
     #     - kvm
 
-    # 'roles:minecraft':
-    #     - openjdk
-    #     - minecraft
+    'roles:minecraft':
+        - openjdk7
+        - minecraft
 
     'roles:plex':
         - plex

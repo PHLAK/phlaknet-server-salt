@@ -3,7 +3,7 @@ base:
         - data.btsync
         - data.groups
         # - data.kvm
-        # - data.minecraft
+        - data.minecraft
         - data.monit
         - data.mumble-server
         - data.mysql-server
