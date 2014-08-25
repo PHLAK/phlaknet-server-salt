@@ -1,5 +1,5 @@
 check process mumble-server with pidfile {{ salt['pillar.get']('mumble-server:pid_file') }}
     start program = "{{ salt['pillar.get']('mumble-server:init_file') }} start" with timeout 30 seconds
     stop program = "{{ salt['pillar.get']('mumble-server:init_file') }} stop"
-    if failed host voice.phlak.net port 64738 then alert
+    if failed host {{ slt['pillar.get']('mumble-server:config:host') }} port {{ slt['pillar.get']('mumble-server:config:port') }} then alert
     if 5 restarts within 5 cycles then timeout

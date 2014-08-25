@@ -29,9 +29,8 @@ set eventqueue
 # HTTPD service configuration
 set httpd
     port {{ salt['pillar.get']('monit:config:httpd:port') }}
-    {% for group in salt['pillar.get']('monit:config:httpd:groups') %}
-        allow {{ group }}
-    {% endfor %}
+    use address localhost
+    allow localhost
 
 ## Send status and events to M/Monit (for more informations about M/Monit
 ## see http://mmonit.com/). By default Monit registers credentials with

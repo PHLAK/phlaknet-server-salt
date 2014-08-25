@@ -21,8 +21,9 @@ monit:
         - require:
             - pkg: monit
 
-{{ salt['pillar.get']('monit:conf_dir') }}:
+monit-config-dir:
     file.directory:
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}
         - user: root
         - group: root
         - mode: 755

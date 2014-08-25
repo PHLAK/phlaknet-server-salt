@@ -19,3 +19,14 @@ php:
         - template: jinja
         - require:
             - pkg: php
+
+php-monit-config:
+    file.managed:
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}/php
+        - source: salt://btsync/files/etc/monit/conf.d/php
+        - user: root
+        - group: root
+        - mode: 644
+        - template: jinja
+        - require:
+            - pkg: monit

@@ -1,5 +1,5 @@
 check process openssh-server with pidfile {{ salt['pillar.get']('openssh:pid_file') }}
     start program = "{{ salt['pillar.get']('openssh:init_file') }} start" with timeout 30 seconds
     stop program = "{{ salt['pillar.get']('openssh:init_file') }} stop"
-    if failed port {{ salt['pillar.get']('openssh:config') }} protocol ssh then restart
+    if failed port {{ salt['pillar.get']('openssh:config:port') }} protocol ssh then restart
     if 5 restarts within 5 cycles then timeout

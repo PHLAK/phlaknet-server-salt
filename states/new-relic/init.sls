@@ -25,3 +25,14 @@ new-relic:
             - cmd: new-relic
         # - watch:
         #     - file: {{ salt['pillar.get']('new-relic:config_file') }}
+
+new-relic-monit-config:
+    file.managed:
+        - name: {{ salt['pillar.get']('monit:conf_dir') }}/new-relic
+        - source: salt://btsync/files/etc/monit/conf.d/new-relic
+        - user: root
+        - group: root
+        - mode: 644
+        - template: jinja
+        - require:
+            - pkg: monit

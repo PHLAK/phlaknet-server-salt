@@ -1,8 +1,8 @@
 check process nginx with pidfile {{ salt['pillar.get']('nginx:pid_file') }}
     start program = "{{ salt['pillar.get']('nginx:init_file') }} start"
     stop program  = "{{ salt['pillar.get']('nginx:init_file') }} stop"
-    if cpu > 50% for 2 cycles then alert
-    if cpu > 80% for 5 cycles then restart
-    if totalmem > 256.0 MB for 5 cycles then alert
+    if cpu > 50% for 5 cycles then alert
+    if cpu > 80% for 10 cycles then restart
+    if totalmem > 256.0 MB for 10 cycles then alert
     if failed port 80 protocol http then restart
     if 5 restarts within 5 cycles then timeout
