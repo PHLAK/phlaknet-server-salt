@@ -1,7 +1,6 @@
 base:
     '*':
         - data.btsync
-        - data.groups
         # - data.kvm
         - data.minecraft
         - data.monit

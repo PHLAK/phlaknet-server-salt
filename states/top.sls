@@ -1,6 +1,5 @@
 base:
     '*' :
-        - groups
         - management-tools.bwm-ng
         - management-tools.htop
         - management-tools.speedtest-cli

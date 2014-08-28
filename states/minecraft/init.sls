@@ -10,3 +10,7 @@ minecraft:
         - user: root
         - group: minecraft
         - mode: 775
+
+    group.present:
+        - name: minecraft
+        - gid: 500

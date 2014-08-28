@@ -15,6 +15,10 @@ nginx:
         - watch:
             - file: {{ salt['pillar.get']('nginx:config_file') }}
 
+    group.present:
+        - name: webdev
+        - gid: 550
+
     file.managed:
         - name: {{ salt['pillar.get']('nginx:config_file') }}
         - source: salt://nginx/files/etc/nginx/nginx.conf
