@@ -14,6 +14,7 @@ btsync:
 
     group.present:
         - name: {{ salt['pillar.get']('btsync:group') }}
+        - gid: {{ salt['pillar.get']('btsync:gid') }}
         - require:
             - pkg: btsync
 
@@ -21,6 +22,8 @@ btsync:
         - name: {{ salt['pillar.get']('btsync:user') }}
         - shell: /bin/false
         - home: /var/lib/btsync
+        - uid: {{ salt['pillar.get']('btsync:uid') }}
+        - gid: {{ salt['pillar.get']('btsync:gid') }}
         - require:
             - pkg: btsync
             - group: btsync
@@ -29,6 +32,7 @@ btsync:
         - enable: true
         - require:
             - pkg: btsync
+            - file: btsync
         - watch:
             - file: {{ salt['pillar.get']('btsync:config_file') }}
 

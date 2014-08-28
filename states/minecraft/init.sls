@@ -12,5 +12,5 @@ minecraft:
         - mode: 775
 
     group.present:
-        - name: minecraft
-        - gid: 500
+        - name: {{ salt['pillar.get]('minecraft:group') }}
+        - gid: {{ salt['pillar.get]('minecraft:gid') }}

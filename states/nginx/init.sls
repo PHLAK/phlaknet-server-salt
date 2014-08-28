@@ -12,8 +12,10 @@ nginx:
         - reload: true
         - require:
             - pkg: nginx
+            - file: nginx
         - watch:
             - file: {{ salt['pillar.get']('nginx:config_file') }}
+            - file: {{ salt['pillar.get']('nginx:dirs:sites_enabled') }}/*
 
     group.present:
         - name: webdev

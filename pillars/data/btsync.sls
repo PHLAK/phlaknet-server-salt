@@ -2,6 +2,8 @@ btsync:
 
     user: btsync
     group: btsync
+    uid: 520
+    gid: 520
 
     config_file: /etc/btsync/debconf-default.conf
     init_file: /etc/init.d/btsync
